@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fafafa;
+        }
+
+        header {
+            background-color: #555555;
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .registration-form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .registration-form label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: #262626;
+        }
+
+        .registration-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #dbdbdb;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .registration-form button {
+            background-color: rgb(223, 155, 52);
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .registration-form button:hover {
+            background-color: #3477db;
+        }
+
+        .registration-form p {
+            margin-top: 16px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .registration-form a {
+            color: #555555;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+
+
+    </style>
+</head>
+
+<body>
+<header>
+    <h1>Registration Form</h1>
+</header>
+
+<main>
+    <form action="/signup" method="post" class="registration-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="surname">Surname:</label>
+        <input type="text" id="surname" name="surname" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Create</button>
+    </form>
+
+    <p>Already have an account? <a href="/">Log in</a></p>
+</main>
+
+<script src="src/script.js"></script>
+</body>
+
+</html>

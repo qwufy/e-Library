@@ -1,0 +1,49 @@
+<!-- book.hbs -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{book.title}} - MyE-Library</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+<header>
+    <h1>{{book.title}}</h1>
+    <div class="navbar">
+        <button class="hamburger" onclick="toggleSidebar()">☰</button>
+    </div>
+</header>
+
+<main>
+    <div class="book-details">
+        <img src="{{book.cover}}" alt="{{book.title}}">
+        <h2>{{book.title}}</h2>
+        <p>Author: {{book.author}}</p>
+        <p>Description: {{book.description}}</p>
+        <button onclick="readBook()">Read</button>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2023 MyE-Library. All rights reserved.</p>
+</footer>
+
+<script src="src/script.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelector('.hamburger').addEventListener('click', function () {
+            toggleSidebar();
+        });
+    });
+
+    function readBook() {
+        // Добавьте код для открытия книги (например, модального окна или перехода на другую страницу)
+    }
+</script>
+</body>
+
+</html>

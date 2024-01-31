@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Library</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+
+<body>
+<header>
+    <div class="navbar">
+        <button class="hamburger" onclick="toggleSidebar()">☰</button>
+        <input type="text" id="searchInput" placeholder="Search books...">
+        <a href="/profile">
+            <div class="profile-icon">
+                👤
+                <span id="username">{{naming}}</span>
+            </div>
+        </a>
+    </div>
+</header>
+
+<main>
+    <ul>
+        {{#each books}}
+            <li>
+                <img src="{{this.volumeInfo.imageLinks.thumbnail}}" alt="{{this.volumeInfo.title}}">
+                <h3>{{this.volumeInfo.title}}</h3>
+                <p>{{this.volumeInfo.authors}}</p>
+                <!-- Другие данные книги -->
+            </li>
+        {{/each}}
+    </ul>
+</main>
+
+<aside class="sidebar">
+    <button class="close-btn" onclick="toggleSidebar()">×</button>
+    <nav>
+        <ul>
+            <li><a href="/home">Main</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/library">My Library</a></li>
+            <!-- Добавьте другие ссылки на страницы -->
+        </ul>
+    </nav>
+</aside>
+
+<footer>
+    <p>&copy; 2023 MyE-Library. All rights reserved.</p>
+</footer>
+
+<script src="/src/script.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelector('.hamburger').addEventListener('click', function () {
+            toggleSidebar();
+        });
+    });
+</script>
+</body>
+
+</html>

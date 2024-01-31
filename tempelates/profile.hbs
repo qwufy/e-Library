@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - MyE-Library</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+<header>
+    <h1>Profile</h1>
+    <div class="navbar">
+        <button class="hamburger" onclick="toggleSidebar()">☰</button>
+    </div>
+</header>
+
+<main>
+    <aside class="sidebar">
+        <a href="home.hbs">Main</a>
+        <a href="profile.hbs">Profile</a>
+        <a href="#">My Library</a>
+        <a href="#">Recommendations</a>
+        <a href="#">New Releases</a>
+    </aside>
+
+    <div class="profile-container">
+        <div class="profile-info">
+            <input type="file" id="avatarInput" style="display: none;" accept="image/*">
+            <label for="avatarInput">
+                <img id="userAvatar" src="user-avatar.jpg" alt="User Avatar">
+            </label>
+            <h2>User Name</h2>
+            <p>Email: user@example.com</p>
+            <p>Date of Birth: January 1, 1990</p>
+            <p>Books Read: <span id="booksReadCounter">0</span></p>
+        </div>
+
+        <div class="profile-actions">
+            <button>Edit Profile</button>
+            <button><a href="/">Log Out</a></button>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2023 MyE-Library. All rights reserved.</p>
+</footer>
+
+<script src="/src/script.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelector('.hamburger').addEventListener('click', function () {
+            toggleSidebar();
+        });
+    });
+</script>
+
+</body>
+
+</html>

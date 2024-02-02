@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-Library</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/css/home.css">
 </head>
 
 <body>
@@ -26,7 +26,7 @@
 <main>
     <ul>
         {{#each books}}
-            <li>
+            <li class="book-container">
                 <img src="{{this.volumeInfo.imageLinks.thumbnail}}" alt="{{this.volumeInfo.title}}">
                 <h3>{{this.volumeInfo.title}}</h3>
                 <p>{{this.volumeInfo.authors}}</p>
@@ -39,12 +39,13 @@
 <aside class="sidebar">
     <button class="close-btn" onclick="toggleSidebar()">×</button>
     <nav>
-        <ul>
-            <li><a href="/home">Main</a></li>
-            <li><a href="/profile">Profile</a></li>
-            <li><a href="/library">My Library</a></li>
-            <!-- Добавьте другие ссылки на страницы -->
-        </ul>
+
+            <a href="/home" class="non-rotating">Main</a>
+            <a href="/profile" class="non-rotating">Profile</a>
+            <a href="#" class="non-rotating">My Library</a>
+            <a href="#" class="non-rotating">Recommendations</a>
+            <a href="#" class="non-rotating">New Releases</a>
+
     </nav>
 </aside>
 
@@ -52,14 +53,7 @@
     <p>&copy; 2023 MyE-Library. All rights reserved.</p>
 </footer>
 
-<script src="/src/script.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelector('.hamburger').addEventListener('click', function () {
-            toggleSidebar();
-        });
-    });
-</script>
+<script src="script.js"></script>
 </body>
 
 </html>

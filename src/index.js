@@ -10,6 +10,10 @@ app.use(express.json())
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+const srcPath = path.join(__dirname, '../src'); // Путь к папке src
+app.use(express.static(srcPath)); // Добавляем обработку папки src
+
+
 app.use(express.urlencoded({ extended: false }))
 const tempelatePath = path.join(__dirname, '../tempelates')
 const publicPath = path.join(__dirname, '../public')
@@ -35,7 +39,8 @@ app.get('/home', async (req, res) => {
         const response = await axios.get('https://www.googleapis.com/books/v1/volumes', {
             params: {
                 q: 'programming', // Замените на ваш запрос
-                key: 'AIzaSyCGAbTdLgR_N0EF95SOYpbJh8w5_AQpEf0', // Замените на свой API-ключ
+                key: 'AIzaSyCGAbTdLgR_N0EF95SOYpbJh8w5_AQpEf0',
+                maxResults: 15,
             },
         });
 
@@ -50,8 +55,6 @@ app.get('/home', async (req, res) => {
     }
 });
 app.get('/book/:id', (req, res) => {
-    // Здесь вы можете добавить логику для получения информации о конкретной книге
-    // с использованием id из параметра запроса и передать ее при рендеринге страницы
     const bookId = req.params.id;
     const bookInfo = {
         _id: bookId,
@@ -103,7 +106,7 @@ app.post('/signup', async (req, res) => {
         dob: req.body.dob,
         password: req.body.password,
         emailVerificationToken: generateEmailVerificationToken(),
-        emailVerified: false,  // Устанавливаем в false, так как email еще не подтвержден
+        emailVerified: false,
     };
 
     try {
@@ -113,13 +116,10 @@ app.post('/signup', async (req, res) => {
             res.send("User with this email already exists");
         } else {
             await LogInCollection.create(data);
-
-            // Отправка электронной почты с токеном подтверждения
             sendEmailVerificationEmail(req.body.email, data.emailVerificationToken);
 
-            res.status(201).render("home", {
-                naming: req.body.name
-            });
+            // После успешной регистрации, перенаправляем пользователя на страницу home
+            res.redirect("/home");
         }
     } catch (error) {
         console.error(error);
@@ -132,15 +132,17 @@ app.post('/login', async (req, res) => {
     try {
         const check = await LogInCollection.findOne({ name: req.body.name });
 
-        if (check.password === req.body.password) {
-            res.status(201).render("home", { naming: req.body.name });
+        if (check && check.password === req.body.password) {
+            // После успешного входа, перенаправляем пользователя на страницу home
+            res.redirect("/home");
         } else {
-            res.send("Incorrect Password");
+            res.send("Incorrect Password or User not found");
         }
     } catch (e) {
         res.send("Wrong Details");
     }
 });
+
 
 app.get('/verify/:token', async (req, res) => {
     const token = req.params.token;

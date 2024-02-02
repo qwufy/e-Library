@@ -251,3 +251,49 @@ nav ul li {
 .book-details {
     text-align: center;
 }
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+main {
+    display: flex;
+    overflow-x: hidden;
+    padding: 20px;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    animation: scrollBooks 30s linear infinite; /* 30s - время одного круга, можно изменить */
+}
+
+li {
+    margin-right: 20px;
+    text-align: center;
+    flex: 0 0 auto;
+    transition: transform 0.5s;
+}
+
+li:hover {
+    transform: scale(1.1); /* Эффект при наведении (необязательно) */
+}
+
+@keyframes scrollBooks {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-100% - 20px)); /* Прокручиваем влево на 100%, чтобы показать следующую книгу */
+    }
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px; /* Закругление углов изображения (по желанию) */
+}
+

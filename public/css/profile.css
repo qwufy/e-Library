@@ -4,36 +4,20 @@ body {
     font-family: Arial, sans-serif;
 }
 
+h1 {
+    margin: 0;
+    text-align: center;
+}
+
 header {
     background-color: #333;
     color: #fff;
-    padding: 1em;
+    padding: 1px;
     text-align: center;
 }
 
 main {
-    display: flex;
-    overflow-x: hidden;
     padding: 20px;
-}
-
-ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    animation: scrollBooks 30s linear infinite;
-}
-
-li {
-    margin-right: 20px;
-    text-align: center;
-    flex: 0 0 auto;
-    transition: transform 0.5s;
-}
-
-li:hover {
-    transform: scale(1.1);
 }
 
 footer {
@@ -46,29 +30,80 @@ footer {
     width: 100%;
 }
 
-@keyframes scrollBooks {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(calc(-100% - 20px));
-    }
-}
-.book {
-    margin-right: 20px;
-    text-align: center;
-    flex: 0 0 auto;
-    transition: transform 0.5s;
+.profile-container {
+    max-width: 400px;
+    margin: 0 auto;
 }
 
-.book:hover {
-    transform: scale(1.1);
-}
-
-img {
-    max-width: 100%;
-    height: auto;
+.profile-info {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.profile-info img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.profile-info h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.profile-info p {
+    font-size: 14px;
+    color: #555;
+}
+
+.profile-actions {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.profile-actions button {
+    background-color: #333;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.profile-actions button:hover {
+    background-color: #555;
+}
+
+.bookshelf {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.book {
+    width: 150px;
+}
+
+.book img {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.book-details {
+    text-align: center;
 }
 
 /* Стили для боковой панели */
@@ -76,6 +111,7 @@ img {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 1em;
 }
 
 .sidebar {
@@ -95,6 +131,7 @@ img {
     font-size: 1.5em;
     cursor: pointer;
     color: #fff;
+    order: -1; /* Переместить hamburger влево */
 }
 
 .close-btn {
@@ -130,33 +167,3 @@ nav ul li {
     background-color: #555;
 }
 
-/* Отмена анимации для элементов с классом .non-rotating */
-.sidebar a.non-rotating {
-    animation: none !important;
-}
-
-/* search */
-
-#searchInput {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-right: 10px;
-    transition: width 0.3s;
-    width: 150px;
-}
-
-#searchInput:focus {
-    width: 200px;
-}
-
-#overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-}

@@ -13,8 +13,9 @@
 <header>
     <div class="navbar">
         <button class="hamburger" onclick="toggleSidebar()">☰</button>
-        <input type="text" id="searchInput" placeholder="Search books...">
-        <a href="/profile">
+        <form id="searchForm"> <!-- Добавлен id "searchForm" к форме -->
+            <input type="text" id="searchInput" placeholder="Search books..." oninput="searchBooks()">
+        </form>        <a href="/profile">
             <div class="profile-icon">
                 👤
                 <span id="username">{{naming}}</span>
@@ -34,12 +35,12 @@
             </li>
         {{/each}}
     </ul>
+
 </main>
 
 <aside class="sidebar">
     <button class="close-btn" onclick="toggleSidebar()">×</button>
     <nav>
-
             <a href="/home" class="non-rotating">Main</a>
             <a href="/profile" class="non-rotating">Profile</a>
             <a href="#" class="non-rotating">My Library</a>
@@ -53,6 +54,7 @@
     <p>&copy; 2023 MyE-Library. All rights reserved.</p>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="script.js"></script>
 </body>
 

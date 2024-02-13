@@ -1,46 +1,47 @@
-const express = require("express")
-const path = require("path")
+const express = require("express");
+const cool = require('cool-ascii-faces');
+const path = require("path");
+const crypto = require("crypto");
 const axios = require("axios");
-const app = express()
-const crypto = require('crypto');
+const app = express();
 const nodemailer = require('nodemailer');
-const LogInCollection = require("./mongo")
-const port = process.env.PORT || 3000
-app.use(express.json())
+require('dotenv').config();
+const LogInCollection = require("./mongo");
+const port = process.env.PORT || 3000;
+app.use(express.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 const srcPath = path.join(__dirname, '../src'); // Путь к папке src
-app.use(express.static(srcPath)); // Добавляем обработку папки src
+app.use(express.static(srcPath)); // Обработка папки src
 
-
-app.use(express.urlencoded({ extended: false }))
-const tempelatePath = path.join(__dirname, '../tempelates')
-const publicPath = path.join(__dirname, '../public')
+app.use(express.urlencoded({ extended: false }));
+const tempelatePath = path.join(__dirname, '../tempelates');
+const publicPath = path.join(__dirname, '../public');
 console.log(publicPath);
 
-app.set('view engine', 'hbs')
-app.set('views', tempelatePath)
-app.use(express.static(publicPath))
-
+app.set('view engine', 'hbs');
+app.set('views', tempelatePath);
+app.use(express.static(publicPath));
 
 app.get('/signup', (req, res) => {
-    res.render('signup')
-})
+    res.render('signup');
+});
 app.get('/', (req, res) => {
-    res.render('login')
-})
+    res.render('login');
+});
 app.get('/profile', (req, res) => {
     res.render('profile');
 });
 app.get('/home', async (req, res) => {
     try {
+        const searchTerm = req.query.search; // Получаем поисковый запрос из параметра запроса
         // Здесь делаем запрос к Google Books API
         const response = await axios.get('https://www.googleapis.com/books/v1/volumes', {
             params: {
-                q: 'programming', // Замените на ваш запрос
+                q: searchTerm || 'money', // Замените на ваш запрос
                 key: 'AIzaSyCGAbTdLgR_N0EF95SOYpbJh8w5_AQpEf0',
-                maxResults: 15,
+                maxResults: 20,
             },
         });
 
@@ -52,6 +53,16 @@ app.get('/home', async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
+
+        if (error.response) {
+            console.error('Response error:', error.response.status, error.response.data);
+        } else if (error.request) {
+            console.error('Request error:', error.request);
+        } else {
+            console.error('Error message:', error.message);
+        }
+
+        alert('Failed to fetch search results. Please try again.');
     }
 });
 app.get('/book/:id', (req, res) => {
@@ -76,8 +87,8 @@ function sendEmailVerificationEmail(email, token) {
         // Настройте здесь свой почтовый сервер
         service: 'gmail',
         auth: {
-            user: 'moldrakhmetov05@gmail.com',
-            pass: 'az.az.sayat05',
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS,
         },
     });
 
@@ -96,7 +107,6 @@ function sendEmailVerificationEmail(email, token) {
         }
     });
 }
-
 
 app.post('/signup', async (req, res) => {
     const data = {
@@ -127,7 +137,6 @@ app.post('/signup', async (req, res) => {
     }
 });
 
-
 app.post('/login', async (req, res) => {
     try {
         const check = await LogInCollection.findOne({ name: req.body.name });
@@ -142,7 +151,6 @@ app.post('/login', async (req, res) => {
         res.send("Wrong Details");
     }
 });
-
 
 app.get('/verify/:token', async (req, res) => {
     const token = req.params.token;
@@ -164,6 +172,8 @@ app.get('/verify/:token', async (req, res) => {
     }
 });
 
+app.get('/cool', (req, res) => res.send(cool()));
+
 app.listen(port, () => {
     console.log('port connected');
-})
+});

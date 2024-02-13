@@ -1,26 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In</title>
+    <title>Login</title>
     <link rel="stylesheet" href="css/login.css">
 </head>
+
 <body>
+<header>
+    <h1>Login</h1>
+</header>
 
-    <h1>Login Form</h1>
+<main>
+    <form action="/login" method="post" class="registration-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
 
-    <form action="/login" method="post" >
-        <input placeholder="Name" name="name" type="text">
-        <br>
-        <input placeholder="Password" name="password" type="password">
-        <br>
-        <input class="sub" type="submit">
-     <h3>Don't have an account?</h3>
-    <a href="/signup">Create a new account</a>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit" class="sub">Log In</button>
     </form>
 
-<script src="/src/script.js"></script>
+    <p>Don't have an account? <a href="/signup">Create a new account</a></p>
+</main>
+
+<script src="src/script.js"></script>
 </body>
+
 </html>

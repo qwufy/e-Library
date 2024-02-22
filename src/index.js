@@ -1,9 +1,10 @@
 const express = require("express");
-const cool = require('cool-ascii-faces');
+const bcrypt = require('bcrypt');
 const path = require("path");
 const crypto = require("crypto");
 const axios = require("axios");
 const app = express();
+const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 require('dotenv').config();
 const LogInCollection = require("./mongo");
@@ -39,7 +40,7 @@ app.get('/home', async (req, res) => {
         // Здесь делаем запрос к Google Books API
         const response = await axios.get('https://www.googleapis.com/books/v1/volumes', {
             params: {
-                q: searchTerm || 'money', // Замените на ваш запрос
+                q: searchTerm || 'money, programming, time, success', // Замените на ваш запрос
                 key: 'AIzaSyCGAbTdLgR_N0EF95SOYpbJh8w5_AQpEf0',
                 maxResults: 20,
             },
@@ -78,58 +79,73 @@ app.get('/book/:id', (req, res) => {
     res.render('book', { book: bookInfo });
 });
 
-function generateEmailVerificationToken() {
-    return crypto.randomBytes(16).toString('hex');
+function generateJwtToken(userId) {
+    return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '1h' }); // Измените expiresIn по вашему желанию
 }
 
-function sendEmailVerificationEmail(email, token) {
-    const transporter = nodemailer.createTransport({
-        // Настройте здесь свой почтовый сервер
-        service: 'gmail',
-        auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS,
-        },
-    });
 
-    const mailOptions = {
-        from: 'moldrakhmetov05@gmail.com',
-        to: email,
-        subject: 'Email Verification',
-        text: `Click on the following link to verify your email: http://your-app-url/verify/${token}`,
-    };
-
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.error(error);
-        } else {
-            console.log('Email sent: ' + info.response);
-        }
-    });
+async function hashPassword(password) {
+    try {
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        console.log('Hashed password:', hashedPassword); 
+        return hashedPassword;
+    } catch (error) {
+        throw new Error("Failed to hash password");
+    }
 }
+
+
 
 app.post('/signup', async (req, res) => {
-    const data = {
-        name: req.body.name,
-        surname: req.body.surname,
-        email: req.body.email,
-        dob: req.body.dob,
-        password: req.body.password,
-        emailVerificationToken: generateEmailVerificationToken(),
-        emailVerified: false,
-    };
+    const { name, surname, email, dob, password } = req.body;
 
     try {
-        const checking = await LogInCollection.findOne({ email: req.body.email });
+        const existingUser = await LogInCollection.findOne({ email });
 
-        if (checking) {
-            res.send("User with this email already exists");
+        if (existingUser) {
+            return res.send("A user with this email already exists");
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const newUser = new LogInCollection({
+            name,
+            surname,
+            email,
+            dob,
+            password: hashedPassword,
+        });
+
+        await newUser.save();
+
+        const token = generateJwtToken(newUser._id);
+
+        res.json({ token }); // Отправляем GWT Token в ответе
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+  
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        const user = await LogInCollection.findOne({ email });
+
+        if (user) {
+            const isMatch = await bcrypt.compare(password, user.password);
+
+            if (isMatch) {
+                const token = generateJwtToken(user._id);
+                res.json({ token }); // Отправляем GWT Token в ответе
+            } else {
+                res.status(401).send("Invalid credentials");
+            }
         } else {
-            await LogInCollection.create(data);
-            sendEmailVerificationEmail(req.body.email, data.emailVerificationToken);
-
-            // После успешной регистрации, перенаправляем пользователя на страницу home
-            res.redirect("/home");
+            res.status(404).send("User not found");
         }
     } catch (error) {
         console.error(error);
@@ -137,42 +153,22 @@ app.post('/signup', async (req, res) => {
     }
 });
 
-app.post('/login', async (req, res) => {
-    try {
-        const check = await LogInCollection.findOne({ name: req.body.name });
 
-        if (check && check.password === req.body.password) {
-            // После успешного входа, перенаправляем пользователя на страницу home
-            res.redirect("/home");
-        } else {
-            res.send("Incorrect Password or User not found");
-        }
-    } catch (e) {
-        res.send("Wrong Details");
-    }
+function authenticateToken(req, res, next) {
+    const token = req.headers['authorization'];
+
+    if (!token) return res.status(401).send("Access denied");
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+        if (err) return res.status(403).send("Invalid token");
+        req.user = user;
+        next();
+    });
+}
+
+app.get('/profile', authenticateToken, (req, res) => {
+    res.json(req.user);
 });
-
-app.get('/verify/:token', async (req, res) => {
-    const token = req.params.token;
-
-    try {
-        const user = await LogInCollection.findOne({ emailVerificationToken: token });
-
-        if (user) {
-            // Устанавливаем флаг emailVerified в true
-            await LogInCollection.updateOne({ _id: user._id }, { $set: { emailVerified: true } });
-
-            res.send('Email verified successfully. You can now log in.');
-        } else {
-            res.send('Invalid token.');
-        }
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error');
-    }
-});
-
-app.get('/cool', (req, res) => res.send(cool()));
 
 app.listen(port, () => {
     console.log('port connected');

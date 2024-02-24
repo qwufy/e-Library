@@ -31,8 +31,8 @@ app.get('/signup', (req, res) => {
 app.get('/', (req, res) => {
     res.render('login');
 });
-app.get('/profile', (req, res) => {
-    res.render('profile');
+app.get('/profile', authenticateToken, (req, res) => {
+    res.json(req.user);
 });
 app.get('/home', async (req, res) => {
     try {
@@ -140,7 +140,7 @@ app.post('/login', async (req, res) => {
 
             if (isMatch) {
                 const token = generateJwtToken(user._id);
-                res.json({ token }); // Отправляем GWT Token в ответе
+                res.redirect(`/home?token=${token}`);
             } else {
                 res.status(401).send("Invalid credentials");
             }
@@ -166,9 +166,7 @@ function authenticateToken(req, res, next) {
     });
 }
 
-app.get('/profile', authenticateToken, (req, res) => {
-    res.json(req.user);
-});
+
 
 app.listen(port, () => {
     console.log('port connected');

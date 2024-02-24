@@ -121,12 +121,14 @@ app.post('/signup', async (req, res) => {
 
         const token = generateJwtToken(newUser._id);
 
-        res.json({ token }); // Отправляем GWT Token в ответе
+        // Отправляем перенаправление на страницу home с токеном в качестве параметра запроса
+        res.redirect(`/home?token=${token}`);
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal Server Error");
     }
 });
+
 
   
 app.post('/login', async (req, res) => {

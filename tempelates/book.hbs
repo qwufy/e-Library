@@ -1,49 +1,446 @@
-<!-- book.hbs -->
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{book.title}} - MyE-Library</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://use.fontawesome.com/be1ba39dfe.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/book.css">
+    <link rel="icon" type="image/x-icon" href="/images/e-library.png">
+    <title>Genre</title>
 </head>
-
 <body>
 <header>
-    <h1>{{book.title}}</h1>
     <div class="navbar">
         <button class="hamburger" onclick="toggleSidebar()">☰</button>
+        <a href="/profile">
+        <div class="profile-icon">
+            👤
+            <span id="username">{{naming}}</span>
+        </div>
+    </a>
     </div>
 </header>
 
-<main>
-    <div class="book-details">
-        <img src="{{book.cover}}" alt="{{book.title}}">
-        <h2>{{book.title}}</h2>
-        <p>Author: {{book.author}}</p>
-        <p>Description: {{book.description}}</p>
-        <button onclick="readBook()">Read</button>
+<aside class="sidebar">
+    <button class="close-btn" onclick="toggleSidebar()">×</button>
+    <nav>
+        <a href="/home" class="non-rotating">Main</a>
+        <a href="/profile" class="non-rotating">Profile</a>
+        <a href="library" class="non-rotating">My Library</a>
+        <a href="book" class="non-rotating">Books by Genre</a>
+    </nav>
+</aside>
+
+<div class="section-body">
+    <div class="vertical-nav">
+        <ul>
+            <h4><left>Category</left></h4>
+            <li><a href="#" onclick="showCategory('Adventure')">Adventure</a></li>
+            <li><a href="#" onclick="showCategory('Thriller')">Thriller</a></li>
+            <li><a href="#" onclick="showCategory('Romantic')">Romantic</a></li>
+            <li><a href="#" onclick="showCategory('Comedy')">Comedy</a></li>
+        </ul>
     </div>
-</main>
 
-<footer>
-    <p>&copy; 2023 MyE-Library. All rights reserved.</p>
-</footer>
+    <div class="gallery-main" style="margin-left:25%;padding:1px 16px;height:1000px;">
+        <div id="Adventure" class="category">
+            <h2>Adventure</h2>
+            <div class="gallery"></div>
+            <div class="image-holder">
+                <a href="#">
+                    <img src="./images/Adv1.jfif" alt="img-1">
+                </a>
+                <div class="desc">
+                    Price : 200
+                    <br>
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <button>Buy</button>
+                </div>
+            </div>
 
-<script src="src/script.js"></script>
+            <div class="image-holder">
+                <a href="#">
+                    <img src="./images/Adv2.jfif" alt="img-1">
+                </a>
+                <div class="desc">
+                    Price : 250
+                    <br>
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <button>Buy</button>
+                </div>
+            </div>
+
+            <div class="image-holder">
+                <a href="#">
+                    <img src="./images/Adv3.jfif" alt="img-1">
+                </a>
+                <div class="desc">
+                    Price : 180
+                    <br>
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <button>Buy</button>
+                </div>
+            </div>
+
+            <div class="image-holder">
+                <a href="#">
+                    <img src="./images/Adv4.jfif" alt="img-1">
+                </a>
+                <div class="desc">
+                    Price : 460
+                    <br>
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <button>Buy</button>
+                </div>
+            </div>
+
+            <div class="image-holder">
+                <a href="#">
+                    <img src="./images/Adv5.jfif" alt="img-1">
+                </a>
+                <div class="desc">
+                    Price : 390
+                    <br>
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <button>Buy</button>
+                </div>
+            </div>
+
+            <div class="image-holder">
+                <a href="#">
+                    <img src="./images/Adv6.jfif" alt="img-1">
+                </a>
+                <div class="desc">
+                    Price : 100
+                    <br>
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <button>Buy</button>
+                </div>
+            </div>
+
+            <div class="image-holder">
+                <a href="#">
+                    <img src="./images/adv7.jfif" alt="img-1">
+                </a>
+                <div class="desc">
+                    Price : 304
+                    <br>
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <button>Buy</button>
+                </div>
+            </div>
+
+            <div class="image-holder">
+                <a href="#">
+                    <img src="./images/adv8.jfif" alt="img-1">
+                </a>
+                <div class="desc">
+                    Price : 340
+                    <br>
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <button>Buy</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Thriller -->
+
+        <div id="Thriller" class="category">
+            <h2>Thriller</h2>
+            <div class="gallery"></div>
+            <div class="image-holder">
+                <a href="#">
+                    <img src="./images/th1.jfif" alt="img-1">
+                </a>
+                <div class="desc">
+                    Price : 120
+                    <br>
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <button>Buy</button>
+                </div>
+            </div>
+
+            <div class="image-holder">
+                <a href="#">
+                    <img src="./images/th2.jfif" alt="img-1">
+                </a>
+                <div class="desc">
+                    Price : 402
+                    <br>
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <button>Buy</button>
+                </div>
+            </div>
+
+            <div class="image-holder">
+                <a href="#">
+                    <img src="./images/th3.jfif" alt="img-1">
+                </a>
+                <div class="desc">
+                    Price : 299
+                    <br>
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <button>Buy</button>
+                </div>
+            </div>
+
+            <div class="image-holder">
+                <a href="#">
+                    <img src="./images/th4.jfif" alt="img-1">
+                </a>
+                <div class="desc">
+                    Price : 150
+                    <br>
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <button>Buy</button>
+                </div>
+            </div>
+
+            <div class="image-holder">
+                <a href="#">
+                    <img src="./images/th5.jfif" alt="img-1">
+                </a>
+                <div class="desc">
+                    Price : 300
+                    <br>
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <button>Buy</button>
+                </div>
+            </div>
+
+            <div class="image-holder">
+                <a href="#">
+                    <img src="./images/th6.jfif" alt="img-1">
+                </a>
+                <div class="desc">
+                    Price : 389
+                    <br>
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <button>Buy</button>
+                </div>
+            </div>
+
+            <div class="image-holder">
+                <a href="#">
+                    <img src="./images/th7.jfif" alt="img-1">
+                </a>
+                <div class="desc">
+                    Price : 269
+                    <br>
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <button>Buy</button>
+                </div>
+            </div>
+
+            <div class="image-holder">
+                <a href="#">
+                    <img src="./images/th8.jfif" alt="img-1">
+                </a>
+                <div class="desc">
+                    Price : 451
+                    <br>
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <button>Buy</button>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- Romantic -->
+        <div id="Romantic" class="category">
+            <h2>Romantic</h2>
+            <div class="gallery"></div>
+
+
+            <div class="image-holder">
+                <a href="#">
+                    <img src="./images/r3.jfif" alt="img-1">
+                </a>
+                <div class="desc">
+                    Price : 450
+                    <br>
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <button>Buy</button>
+                </div>
+            </div>
+
+            <div class="image-holder">
+                <a href="#">
+                    <img src="./images/r4.jfif" alt="img-1">
+                </a>
+                <div class="desc">
+                    Price : 299
+                    <br>
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <button>Buy</button>
+                </div>
+            </div>
+
+            <div class="image-holder">
+                <a href="#">
+                    <img src="./images/r5.jfif" alt="img-1">
+                </a>
+                <div class="desc">
+                    Price : 105
+                    <br>
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <button>Buy</button>
+                </div>
+            </div>
+
+
+            <div class="image-holder">
+                <a href="#">
+                    <img src="./images/r7.jfif" alt="img-1">
+                </a>
+                <div class="desc">
+                    Price : 299
+                    <br>
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <button>Buy</button>
+                </div>
+            </div>
+
+            <div class="image-holder">
+                <a href="#">
+                    <img src="./images/r8.jfif" alt="img-1">
+                </a>
+                <div class="desc">
+                    Price : 349
+                    <br>
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <button>Buy</button>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div id="Comedy" class="category">
+            <h2>Comedy</h2>
+            <div class="gallery"></div>
+        </div>
+        <div class="image-holder">
+            <a href="#">
+                <img src="./images/c1.jfif" alt="img-1">
+            </a>
+            <div class="desc">
+                Price : 400
+                <br>
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <button>Buy</button>
+            </div>
+        </div>
+
+        <div class="image-holder">
+            <a href="#">
+                <img src="./images/c2.jfif" alt="img-1">
+            </a>
+            <div class="desc">
+                Price : 299
+                <br>
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <button>Buy</button>
+            </div>
+        </div>
+
+        <div class="image-holder">
+            <a href="#">
+                <img src="./images/c3.jfif" alt="img-1">
+            </a>
+            <div class="desc">
+                Price : 349
+                <br>
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <button>Buy</button>
+            </div>
+        </div>
+
+        <div class="image-holder">
+            <a href="#">
+                <img src="./images/c4.jfif" alt="img-1">
+            </a>
+            <div class="desc">
+                Price : 299
+                <br>
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <button>Buy</button>
+            </div>
+        </div>
+
+        <div class="image-holder">
+            <a href="#">
+                <img src="./images/c5.jfif" alt="img-1">
+            </a>
+            <div class="desc">
+                Price : 199
+                <br>
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <button>Buy</button>
+            </div>
+        </div>
+
+        <div class="image-holder">
+            <a href="#">
+                <img src="./images/c6.jfif" alt="img-1">
+            </a>
+            <div class="desc">
+                Price : 149
+                <br>
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <button>Buy</button>
+            </div>
+        </div>
+
+        <div class="image-holder">
+            <a href="#">
+                <img src="./images/c7.jfif" alt="img-1">
+            </a>
+            <div class="desc">
+                Price : 349
+                <br>
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <button>Buy</button>
+            </div>
+        </div>
+
+        <div class="image-holder">
+            <a href="#">
+                <img src="./images/c8.jfif" alt="img-1">
+            </a>
+            <div class="desc">
+                Price : 250
+                <br>
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <button>Buy</button>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+</div>
+
+<br>
+
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelector('.hamburger').addEventListener('click', function () {
-            toggleSidebar();
+    // Function to show books based on category
+    function showCategory(category) {
+        // Hide all categories
+        const categories = document.querySelectorAll('.category');
+        categories.forEach(cat => {
+            cat.style.display = 'none';
         });
-    });
-
-    function readBook() {
-        // Добавьте код для открытия книги (например, модального окна или перехода на другую страницу)
+        // Show selected category
+        document.getElementById(category).style.display = 'block';
     }
 </script>
+
 </body>
 
 </html>

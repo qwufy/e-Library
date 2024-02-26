@@ -139,3 +139,15 @@ function updateUIWithBooks(books) {
         booksList.appendChild(li);
     });
 }
+
+// Функция для удаления книги из избранных
+function removeFromFavorites(button) {
+    const bookElement = button.parentElement;
+    bookElement.remove();
+}
+
+// Функция для удаления книги из прочитанных
+function removeFromRead(button) {
+    const bookElement = button.parentElement;
+    bookElement.remove();
+}

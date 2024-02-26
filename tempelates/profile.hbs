@@ -19,11 +19,13 @@
 
 <main>
     <aside class="sidebar">
-        <a href="/home">Main</a>
-        <a href="/profile">Profile</a>
-        <a href="#">My Library</a>
-        <a href="#">Recommendations</a>
-        <a href="#">New Releases</a>
+        <button class="close-btn" onclick="toggleSidebar()">×</button>
+        <nav>
+            <a href="/home" class="non-rotating">Main</a>
+            <a href="/profile" class="non-rotating">Profile</a>
+            <a href="/library" class="non-rotating">My Library</a>
+            <a href="/book" class="non-rotating">Books by Genre</a>
+        </nav>
     </aside>
 
     <div class="profile-container">

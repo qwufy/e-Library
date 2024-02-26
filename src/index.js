@@ -34,6 +34,13 @@ app.get('/', (req, res) => {
 app.get('/profile', authenticateToken, (req, res) => {
     res.json(req.user);
 });
+app.get('/library', (req, res) => {
+    res.render('library');
+});
+
+app.get('/book', (req, res) =>{
+    res.render('book')
+})
 app.get('/home', async (req, res) => {
     try {
         const searchTerm = req.query.search; // Получаем поисковый запрос из параметра запроса
@@ -80,7 +87,7 @@ app.get('/book/:id', (req, res) => {
 });
 
 function generateJwtToken(userId) {
-    return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '1h' }); // Измените expiresIn по вашему желанию
+    return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '30m' });
 }
 
 

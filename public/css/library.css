@@ -1,0 +1,168 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    padding-top: 60px;
+    transition: 0.5s;
+}
+
+.hamburger {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #fff;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #fff;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: #555;
+}
+
+.content {
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+main {
+    display: flex;
+    overflow-x: hidden;
+    padding: 20px;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+h2 {
+    color: #555;
+}
+
+/* .section {
+    margin-bottom: 20px;
+} */
+
+.books {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.book {
+    width: 200px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.book img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.book p {
+    margin-top: 5px;
+    text-align: center;
+}
+
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1em;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.left-side,
+.right-side {
+    background-color: #ddd;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 20%;
+    z-index: -1;
+}
+
+.left-side {
+    left: 0;
+}
+
+.right-side {
+    right: 0;
+}
+

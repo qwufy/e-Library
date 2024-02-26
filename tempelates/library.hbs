@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Library</title>
+    <link rel="stylesheet" type="text/css" href="/css/library.css">
+    <link rel="icon" type="image/x-icon" href="/images/e-library.png">
+</head>
+<body>
+<header>
+    <div class="navbar">
+        <button class="hamburger" onclick="toggleSidebar()">☰</button>
+        <a href="/profile">
+        <div class="profile-icon">
+            👤
+            <span id="username">{{naming}}</span>
+        </div>
+    </a>
+    </div>
+</header>
+
+<aside class="sidebar">
+    <button class="close-btn" onclick="toggleSidebar()">×</button>
+    <nav>
+        <a href="/home" class="non-rotating">Main</a>
+        <a href="/profile" class="non-rotating">Profile</a>
+        <a href="library" class="non-rotating">My Library</a>
+        <a href="book" class="non-rotating">Books by Genre</a>
+    </nav>
+</aside>
+
+<div class="content">
+    <div class="header">
+        <h1>My Library</h1>
+    </div>
+
+    <div class="section">
+        <h2>Favorites</h2>
+        <div id="favorites" class="books">
+            <!-- Книги избранных будут отображены здесь -->
+            <div class="book">
+                <img src="/images/SK.jpg" alt="Stiven King IT">
+                <p>Book 1</p>
+                <button class="button" onclick="removeFromFavorites(this)">Delete from favorites</button>
+            </div>
+            <div class="book">
+                <img src="/images/SK2.jpg" alt="Stiven King Pet Sematary">
+                <p>Book 2</p>
+                <button class="button" onclick="removeFromFavorites(this)">Delete from favorites</button>
+            </div>
+            <div class="book">
+                <img src="/images/SK.jpg" alt="Stiven King IT">
+                <p>Book 1</p>
+                <button class="button" onclick="removeFromFavorites(this)">Delete from favorites</button>
+            </div>
+            <div class="book">
+                <img src="/images/SK.jpg" alt="Stiven King IT">
+                <p>Book 1</p>
+                <button class="button" onclick="removeFromFavorites(this)">Delete from favorites</button>
+            </div>
+        </div>
+    </div>
+
+        <div class="section">
+            <h2>Read</h2>
+            <div id="read" class="books">
+                <!-- Книги прочитанных будут отображены здесь -->
+                <div class="book">
+                    <img src="/images/SK3.jpg" alt="Stiven King 11/22/63">
+                    <p>Book 3</p>
+                    <button class="button" onclick="removeFromRead(this)">Delete from read</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<footer>
+    <p>&copy; 2023 MyE-Library. All rights reserved.</p>
+</footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

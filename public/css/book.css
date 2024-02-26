@@ -1,0 +1,180 @@
+body {margin:0;}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    padding-top: 60px;
+    transition: 0.5s;
+}
+
+.hamburger {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #fff;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #fff;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: #555;
+}
+
+/* body section  */
+
+.section-body{
+
+    padding-top: 30px;
+    padding-left: 15px;
+}
+.section-body h4{
+    font-size: large;
+}
+
+.vertical-nav
+{
+    padding-top: 10px;
+}
+
+
+.section-body ul {
+    list-style-type: none;
+    width: 18%;
+    background-color: #d6e4f0;
+    position: fixed;
+    height: auto;
+    overflow: auto;
+}
+
+.section-body  li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.section-body li a.active {
+    background-color: #04AA6D;
+    color: white;
+}
+
+.section-body li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+
+/*
+  section-2 */
+
+.image-holder{
+    border: 1px solid #ccc;
+    transition-duration:200ms;
+    transition-timing-function: ease-out;
+}
+
+.image-holder:hover {
+    border: 1px solid #777;
+    transform: scale(1.05,1.05);
+}
+
+.gallery{
+
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+    flex-wrap: wrap;
+    row-gap: 10px;
+}
+
+div.desc {
+    text-align: center;
+    width: 100%;
+}
+
+.desc i{
+    float: left !important;
+    padding-left: 10px;
+}
+
+.desc button{
+    float:right !important;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+.gallery img{
+    height: 250px;
+    width:200px;
+}
+
+.btn
+{
+    display: block;
+    border-radius: 5px;
+    color:white;
+    background-color: blue;
+    font-size:20px;
+    text-decoration: none;
+    width:fit-content;
+    height:fit-content;
+    padding:5px;
+}
+
+.btn:hover{
+    background-color: rgb(31, 199, 106)ue;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1em;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

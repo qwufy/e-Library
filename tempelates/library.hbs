@@ -13,11 +13,11 @@
     <div class="navbar">
         <button class="hamburger" onclick="toggleSidebar()">☰</button>
         <a href="/profile">
-        <div class="profile-icon">
-            👤
-            <span id="username">{{naming}}</span>
-        </div>
-    </a>
+            <div class="profile-icon">
+                👤
+                <span id="username">{{naming}}</span>
+            </div>
+        </a>
     </div>
 </header>
 
@@ -39,47 +39,26 @@
     <div class="section">
         <h2>Favorites</h2>
         <div id="favorites" class="books">
-            <!-- Книги избранных будут отображены здесь -->
-            <div class="book">
-                <img src="/images/SK.jpg" alt="Stiven King IT">
-                <p>Book 1</p>
-                <button class="button" onclick="removeFromFavorites(this)">Delete from favorites</button>
-            </div>
-            <div class="book">
-                <img src="/images/SK2.jpg" alt="Stiven King Pet Sematary">
-                <p>Book 2</p>
-                <button class="button" onclick="removeFromFavorites(this)">Delete from favorites</button>
-            </div>
-            <div class="book">
-                <img src="/images/SK.jpg" alt="Stiven King IT">
-                <p>Book 1</p>
-                <button class="button" onclick="removeFromFavorites(this)">Delete from favorites</button>
-            </div>
-            <div class="book">
-                <img src="/images/SK.jpg" alt="Stiven King IT">
-                <p>Book 1</p>
-                <button class="button" onclick="removeFromFavorites(this)">Delete from favorites</button>
-            </div>
+            {{#each favoriteBooks}}
+                <div class="book">
+                    <img src="{{this.image}}" alt="{{this.title}}">
+                    <p>{{this.title}}</p>
+                    <!-- Другие данные книги -->
+                </div>
+            {{else}}
+                <p>No favorite books yet.</p>
+            {{/each}}
         </div>
     </div>
 
-        <div class="section">
-            <h2>Read</h2>
-            <div id="read" class="books">
-                <!-- Книги прочитанных будут отображены здесь -->
-                <div class="book">
-                    <img src="/images/SK3.jpg" alt="Stiven King 11/22/63">
-                    <p>Book 3</p>
-                    <button class="button" onclick="removeFromRead(this)">Delete from read</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Аналогичный раздел для прочитанных книг -->
+
+</div>
 
 <footer>
     <p>&copy; 2023 MyE-Library. All rights reserved.</p>
 </footer>
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

@@ -12,6 +12,8 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'images')));
+
 
 const srcPath = path.join(__dirname, '../src'); // Путь к папке src
 app.use(express.static(srcPath)); // Обработка папки src
@@ -32,7 +34,7 @@ app.get('/', (req, res) => {
     res.render('login');
 });
 app.get('/profile', authenticateToken, (req, res) => {
-    res.json(req.user);
+    res.render('profile');
 });
 app.get('/library', (req, res) => {
     res.render('library');
@@ -41,23 +43,59 @@ app.get('/library', (req, res) => {
 app.get('/book', (req, res) =>{
     res.render('book')
 })
+
+async function getRecommendedBooks() {
+    try {
+        const response = await axios.get('https://www.googleapis.com/books/v1/volumes', {
+            params: {
+                q: 'recommended books',
+                maxResults: 5,
+            },
+        });
+
+        return response.data.items;
+    } catch (error) {
+        console.error('Failed to fetch recommended books:', error);
+        return [];
+    }
+}
+
+async function getFeaturedAuthors() {
+    try {
+        const response = await axios.get('https://www.googleapis.com/books/v1/volumes', {
+            params: {
+                q: 'featured authors',
+                maxResults: 5,
+            },
+        });
+
+        return response.data.items;
+    } catch (error) {
+        console.error('Failed to fetch featured authors:', error);
+        return [];
+    }
+}
+
 app.get('/home', async (req, res) => {
     try {
         const searchTerm = req.query.search; // Получаем поисковый запрос из параметра запроса
-        // Здесь делаем запрос к Google Books API
+        // Здесь делаем запрос к Google Books API для книг на основе поискового запроса
         const response = await axios.get('https://www.googleapis.com/books/v1/volumes', {
             params: {
                 q: searchTerm || 'money, programming, time, success', // Замените на ваш запрос
-                key: 'AIzaSyCGAbTdLgR_N0EF95SOYpbJh8w5_AQpEf0',
-                maxResults: 20,
+                maxResults: 5,
             },
         });
 
         // Получаем массив книг из ответа
         const books = response.data.items;
 
-        // Рендерим страницу "home" и передаем массив книг в шаблон
-        res.render('home', { books });
+        // Получаем рекомендованные книги и выдающихся авторов
+        const recommendedBooks = await getRecommendedBooks();
+        const featuredAuthors = await getFeaturedAuthors();
+
+        // Рендерим страницу "home" и передаем массив книг, рекомендованные книги и выдающихся авторов в шаблон
+        res.render('home', { books, recommendedBooks, featuredAuthors });
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
@@ -73,6 +111,7 @@ app.get('/home', async (req, res) => {
         alert('Failed to fetch search results. Please try again.');
     }
 });
+
 app.get('/book/:id', (req, res) => {
     const bookId = req.params.id;
     const bookInfo = {

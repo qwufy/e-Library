@@ -1,4 +1,3 @@
-const axios = require('axios');
 
 function toggleSidebar() {
     const sidebar = document.querySelector('.sidebar');

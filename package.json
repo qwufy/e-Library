@@ -23,7 +23,8 @@
     "mongoose": "^6.12.5",
     "nodemailer": "^6.9.8",
     "nodemon": "^2.0.22",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "slick-carousel": "^1.8.1"
   },
   "description": ""
 }

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-Library</title>
     <link rel="stylesheet" type="text/css" href="/css/home.css">
-    <link rel="icon" type="image/x-icon" href="/images/e-library.png">
+    <link rel="icon" type="image/x-icon" href="e-library.png">
 </head>
 
 <body>
@@ -16,7 +16,9 @@
         <button class="hamburger" onclick="toggleSidebar()">☰</button>
         <form id="searchForm"> <!-- Добавлен id "searchForm" к форме -->
             <input type="text" id="searchInput" placeholder="Search books..." oninput="searchBooks()">
-        </form>        <a href="/profile">
+            <button type="button" onclick="searchBooks()">Search</button> <!-- Добавлено кнопка для поиска -->
+        </form>
+        <a href="/profile">
             <div class="profile-icon">
                 👤
                 <span id="username">{{naming}}</span>
@@ -26,7 +28,7 @@
 </header>
 
 <main>
-    <ul>
+    <ul id="booksList">
         {{#each books}}
             <li class="book-container">
                 <img src="{{this.volumeInfo.imageLinks.thumbnail}}" alt="{{this.volumeInfo.title}}">
@@ -37,15 +39,41 @@
         {{/each}}
     </ul>
 
+<section class="recommended-books">
+    <h2>Recommended Books</h2>
+    <ul>
+        {{#each recommendedBooks}}
+            <a> <li class="book-container">
+                <img src="{{this.volumeInfo.imageLinks.thumbnail}}" alt="{{this.volumeInfo.title}}">
+                <h3>{{this.volumeInfo.title}}</h3>
+                <p>{{this.volumeInfo.authors}}</p>
+                <!-- Другие данные книги -->
+            </li></a>
+        {{/each}}
+    </ul>
+</section>
+
+<section class="featured-authors">
+    <h2>Featured Authors</h2>
+    <ul>
+        {{#each featuredAuthors}}
+            <li class="author-container">
+                <h3>{{this.volumeInfo.authors}}</h3>
+                <p>{{this.volumeInfo.title}}</p>
+                <!-- Другие данные автора -->
+            </li>
+        {{/each}}
+    </ul>
+</section>
 </main>
 
 <aside class="sidebar">
     <button class="close-btn" onclick="toggleSidebar()">×</button>
     <nav>
-            <a href="/home" class="non-rotating">Main</a>
-            <a href="/profile" class="non-rotating">Profile</a>
-            <a href="library" class="non-rotating">My Library</a>
-            <a href="book" class="non-rotating">Books by Genre</a>
+        <a href="/home" class="non-rotating">Main</a>
+        <a href="/profile" class="non-rotating">Profile</a>
+        <a href="library" class="non-rotating">My Library</a>
+        <a href="book" class="non-rotating">Books by Genre</a>
     </nav>
 </aside>
 

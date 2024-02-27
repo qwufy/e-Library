@@ -1,10 +1,16 @@
-body {margin:0;}
-
 header {
     background-color: #333;
     color: #fff;
     padding: 1em;
     text-align: center;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
 }
 
 .navbar {
@@ -65,108 +71,85 @@ nav ul li {
     background-color: #555;
 }
 
-/* body section  */
-
-.section-body{
-
-    padding-top: 30px;
-    padding-left: 15px;
-}
-.section-body h4{
-    font-size: large;
+.container {
+    margin: 0 auto;
+    max-width: 960px;
+    padding: 0 15px;
 }
 
-.vertical-nav
-{
-    padding-top: 10px;
+/* Стили для заголовка */
+.display-4 {
+    font-size: 2.5rem;
+    font-weight: bold;
 }
 
-
-.section-body ul {
-    list-style-type: none;
-    width: 18%;
-    background-color: #d6e4f0;
-    position: fixed;
-    height: auto;
-    overflow: auto;
+/* Стили для карточки */
+.card {
+    border: none;
+    border-radius: 0.25rem;
 }
 
-.section-body  li a {
-    display: block;
-    color: #000;
-    padding: 8px 16px;
-    text-decoration: none;
+.card-header {
+    background-color: #343a40;
+    color: #fff;
 }
 
-.section-body li a.active {
-    background-color: #04AA6D;
-    color: white;
+.card-body {
+    background-color: #212529;
 }
 
-.section-body li a:hover:not(.active) {
-    background-color: #555;
-    color: white;
+.card-title {
+    color: #fff;
 }
 
-/*
-  section-2 */
-
-.image-holder{
-    border: 1px solid #ccc;
-    transition-duration:200ms;
-    transition-timing-function: ease-out;
+/* Стили для кнопок */
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
 }
 
-.image-holder:hover {
-    border: 1px solid #777;
-    transform: scale(1.05,1.05);
+.btn-primary:hover {
+    background-color: #0056b3;
 }
 
-.gallery{
-
-    display: flex;
-    flex-direction: row;
-    column-gap: 20px;
-    flex-wrap: wrap;
-    row-gap: 10px;
+.btn-light {
+    background-color: #f8f9fa;
+    color: #212529;
+    border: none;
 }
 
-div.desc {
-    text-align: center;
-    width: 100%;
+.btn-light:hover {
+    background-color: #e2e6ea;
 }
 
-.desc i{
-    float: left !important;
-    padding-left: 10px;
+/* Стили для текстового поля ввода */
+.form-control {
+    border-radius: 0.25rem;
 }
 
-.desc button{
-    float:right !important;
-    margin-right: 10px;
-    margin-bottom: 5px;
+/* Стили для главного контейнера */
+.bg-light {
+    background-color: #f8f9fa;
 }
 
-.gallery img{
-    height: 250px;
-    width:200px;
+/* Стили для обёртки вьюера */
+#viewerCanvas {
+    width: 800px;
+    height: 800px;
 }
 
-.btn
-{
-    display: block;
-    border-radius: 5px;
-    color:white;
-    background-color: blue;
-    font-size:20px;
-    text-decoration: none;
-    width:fit-content;
-    height:fit-content;
-    padding:5px;
+.float-left {
+    float: left;
 }
 
-.btn:hover{
-    background-color: rgb(31, 199, 106)ue;
+.float-right {
+    float: right;
+}
+
+/* Стили для теней */
+.shadow-lg {
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175)!important;
 }
 
 footer {

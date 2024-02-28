@@ -39,4 +39,15 @@ const logInSchema=new mongoose.Schema({
 
 const LogInCollection=new mongoose.model('LogInCollection',logInSchema)
 
-module.exports=LogInCollection
+const bookSchema = new mongoose.Schema({
+    cover:  String,
+    bookId: { type: String, unique: true },
+    title: String,
+    author: String,
+    description: String
+});
+
+const BookCollection = mongoose.model('BookCollection', bookSchema);
+
+
+module.exports = { LogInCollection, BookCollection };

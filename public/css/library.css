@@ -166,3 +166,53 @@ footer {
     right: 0;
 }
 
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+li {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+    width: 250px;
+    text-align: center;
+}
+
+li img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+li h2 {
+    margin-top: 10px;
+    font-size: 1.2em;
+    color: #333;
+}
+
+li p {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* Кнопка удаления книги */
+li button {
+    background-color: #ff5252;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+li button:hover {
+    background-color: #ff1744;
+}

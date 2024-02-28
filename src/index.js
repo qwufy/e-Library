@@ -7,7 +7,7 @@ const app = express();
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 require('dotenv').config();
-const LogInCollection = require("./mongo");
+const { LogInCollection, BookCollection } = require('./mongo');
 const port = process.env.PORT || 3000;
 app.use(express.json());
 
@@ -36,10 +36,6 @@ app.get('/', (req, res) => {
 app.get('/profile', authenticateToken, (req, res) => {
     res.render('profile');
 });
-app.get('/library', (req, res) => {
-    res.render('library');
-});
-
 app.get('/book', (req, res) =>{
     res.render('book')
 })
@@ -82,7 +78,7 @@ app.get('/home', async (req, res) => {
         // Здесь делаем запрос к Google Books API для книг на основе поискового запроса
         const response = await axios.get('https://www.googleapis.com/books/v1/volumes', {
             params: {
-                q: searchTerm || 'money, programming, time, success', // Замените на ваш запрос
+                q: searchTerm || 'programming, time, success', // Замените на ваш запрос
                 maxResults: 5,
             },
         });
@@ -111,6 +107,31 @@ app.get('/home', async (req, res) => {
         alert('Failed to fetch search results. Please try again.');
     }
 });
+
+app.get("/library", async (req, res) => {
+    try {
+        // Загружаем все книги из базы данных
+        const books = await BookCollection.find({});
+        // Отображаем страницу библиотеки и передаем загруженные книги
+        res.render("library", { books });
+    } catch (error) {
+        console.error("Error loading books:", error);
+        res.status(500).send("Failed to load books");
+    }
+});
+
+app.delete('/delete-book/:id', async (req, res) => {
+    try {
+        const bookId = req.params.id;
+        await BookCollection.findByIdAndDelete(bookId);
+        res.status(200).send('Book deleted successfully');
+    } catch (error) {
+        console.error('Error deleting book:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+
 
 app.get('/book/:id', (req, res) => {
     const bookId = req.params.id;
@@ -201,7 +222,27 @@ app.post('/login', async (req, res) => {
     }
 });
 
+app.post('/save-book', async (req, res) => {
+    try {
+        const { userId, bookId, title, author, description } = req.body;
 
+        // Создаем новую книгу
+        const book = new BookCollection({
+            bookId: bookId,
+            title: title,
+            author: author,
+            description: description
+        });
+
+        // Сохраняем книгу в базу данных
+        await book.save();
+
+        res.status(200).send('Book saved successfully');
+    } catch (error) {
+        console.error('Error saving book:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
 function authenticateToken(req, res, next) {
     const token = req.headers['authorization'];
 

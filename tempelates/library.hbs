@@ -35,24 +35,17 @@
     <div class="header">
         <h1>My Library</h1>
     </div>
-
-    <div class="section">
-        <h2>Favorites</h2>
-        <div id="favorites" class="books">
-            {{#each favoriteBooks}}
-                <div class="book">
-                    <img src="{{this.image}}" alt="{{this.title}}">
-                    <p>{{this.title}}</p>
-                    <!-- Другие данные книги -->
-                </div>
-            {{else}}
-                <p>No favorite books yet.</p>
-            {{/each}}
-        </div>
-    </div>
-
-    <!-- Аналогичный раздел для прочитанных книг -->
-
+    <ul>
+        {{#each books}}
+            <li>
+                <img src="{{cover}}" alt="{{title}}">
+                <h2>{{title}}</h2>
+                <p>{{author}}</p>
+                <p>{{description}}</p>
+                <button onclick="deleteBook('{{book._id}}')">Delete</button>
+            </li>
+        {{/each}}
+    </ul>
 </div>
 
 <footer>

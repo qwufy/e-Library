@@ -4,6 +4,7 @@ function toggleSidebar() {
     sidebar.style.left = sidebar.style.left === '0px' ? '-250px' : '0px';
 }
 
+// Ваш существующий код
 document.addEventListener('DOMContentLoaded', () => {
     const searchForm = document.getElementById('searchForm');
     const searchInput = document.getElementById('searchInput');
@@ -50,54 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Ваш существующий код
-document.addEventListener('DOMContentLoaded', () => {
-    const searchForm = document.getElementById('searchForm');
-    const searchInput = document.getElementById('searchInput');
-    const booksList = document.getElementById('booksList');
-
-    searchForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-
-        const searchQuery = searchInput.value;
-
-        try {
-            const response = await axios.get('https://www.googleapis.com/books/v1/volumes', {
-                params: {
-                    q: searchQuery,
-                    key: 'YOUR_API_KEY', // Замените на ваш ключ API
-                    maxResults: 15,
-                },
-            });
-
-            const books = response.data.items;
-
-            // Очищаем предыдущие результаты поиска
-            booksList.innerHTML = '';
-
-            // Рендерим найденные книги
-            books.forEach((book) => {
-                const listItem = document.createElement('li');
-                listItem.innerHTML = `
-                    <img src="${book.volumeInfo.imageLinks.thumbnail}" alt="${book.volumeInfo.title}">
-                    <h3>${book.volumeInfo.title}</h3>
-                    <p>${book.volumeInfo.authors}</p>
-                `;
-                booksList.appendChild(listItem);
-            });
-        } catch (error) {
-            console.error(error);
-            alert('Failed to fetch search results. Please try again.');
-        }
-    });
-
-    // Очистка результатов при фокусе на поле ввода
-    searchInput.addEventListener('focus', () => {
-        booksList.innerHTML = '';
-    });
-});
-
-// Ваш существующий код
 function searchBooks() {
     const query = document.getElementById('searchInput').value;
     search(query);
@@ -108,7 +61,7 @@ function search(query) {
     axios.get('https://www.googleapis.com/books/v1/volumes', {
         params: {
             q: query,
-            key: 'YOUR_API_KEY', // Замените на ваш ключ API
+            key: 'AIzaSyCGAbTdLgR_N0EF95SOYpbJh8w5_AQpEf0',
         },
     })
         .then(response => {
@@ -139,14 +92,15 @@ function updateUIWithBooks(books) {
     });
 }
 
-// Функция для удаления книги из избранных
-function removeFromFavorites(button) {
-    const bookElement = button.parentElement;
-    bookElement.remove();
-}
-
-// Функция для удаления книги из прочитанных
-function removeFromRead(button) {
-    const bookElement = button.parentElement;
-    bookElement.remove();
+async function deleteBook(bookId) {
+    try {
+        const response = await axios.delete(`/delete-book/${bookId}`);
+        if (response.status === 200) {
+            // Обновляем страницу после успешного удаления книги
+            window.location.reload();
+        }
+    } catch (error) {
+        console.error('Error deleting book:', error);
+        alert('Failed to delete book. Please try again.');
+    }
 }

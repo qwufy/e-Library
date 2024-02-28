@@ -33,7 +33,7 @@ app.get('/signup', (req, res) => {
 app.get('/', (req, res) => {
     res.render('login');
 });
-app.get('/profile', authenticateToken, (req, res) => {
+app.get('/profile', (req, res) => {
     res.render('profile');
 });
 app.get('/book', (req, res) =>{
@@ -243,19 +243,6 @@ app.post('/save-book', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-function authenticateToken(req, res, next) {
-    const token = req.headers['authorization'];
-
-    if (!token) return res.status(401).send("Access denied");
-
-    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-        if (err) return res.status(403).send("Invalid token");
-        req.user = user;
-        next();
-    });
-}
-
-
 
 app.listen(port, () => {
     console.log('port connected');

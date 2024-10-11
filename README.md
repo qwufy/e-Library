@@ -45,4 +45,5 @@ Explore the features of the e-Library system!
 
 Contact
 Sayat - @qwufy
-email: moldrakhmetovs05@gmail.com
+Telegram: @smn017
+Email: moldrakhmetovs05@gmail.com
